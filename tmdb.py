@@ -26,18 +26,16 @@ import webbrowser
 	
 def main():
 	"""Getting input and passing to other functions"""
-	title = raw_input('Enter the name of the movie-->  ')
+	#title = raw_input('Enter the name of the movie-->  ')
 	obj = movie.movie()
-	if obj.get_similar_movie_titles(title):
-		print 'Got information, do you want to open the IMDB link?'
-	else:
-		print 'There was Error prcessing your request'
-		exit(1)
-	li = obj.get_imdb_list()
-	imdb = 'http://www.imdb.com/title/' + li[0] + '/'
-	webbrowser.open(imdb)
+	obj.build_db('golmaal')
+	choice = input('Enter the index number of the movie you would like to know more about-->  ')
+	if choice <0 or choice > (len(obj.similar_movie_list_title))-1:
+		print 'invalid choice'
+	obj.get_info(choice)
 	return 0
 
 if __name__ == '__main__':
 	main()
+
 
