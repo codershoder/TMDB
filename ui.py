@@ -48,6 +48,7 @@ class MyPanel(wx.Panel):
         
         self.indextextbox = wx.TextCtrl(self, -1, "",wx.DefaultPosition, wx.DefaultSize,style=wx.TE_PROCESS_ENTER)
         wx.EVT_TEXT_ENTER(self,self.indextextbox.GetId(),self.ButtonThreePressed)
+        
         self.label2 = wx.StaticText(self, -1, '',wx.DefaultPosition, wx.DefaultSize)
         self.label2.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
 
@@ -75,19 +76,21 @@ class MyPanel(wx.Panel):
         
         self.SetSizer(topsizer)
         self.button2.Disable()
+        self.indextextbox.Disable()
 
     def ButtonOnePressed(self, event):
 		if self.searchtextbox.GetValue() == "":
 			self.textbox.SetValue(constants.ENTER_SOMETHING_VALID)
 			return
-		obj = movie.movie()
-		db = obj.build_db(self.searchtextbox.GetValue())
+		self.obj = movie.movie()
+		db = self.obj.build_db(self.searchtextbox.GetValue())
 		if not db:
 			self.textbox.SetValue(constants.COULD_NOT_FIND_MOVIE)
 			return
 		self.textbox.SetValue(constants.SUMMARY)
 		self.textbox.AppendText(db)
 		self.button2.Enable()
+		self.indextextbox.Enable()
 		self.label2.SetLabel('Enter the index')
 		
 		
@@ -99,7 +102,9 @@ class MyPanel(wx.Panel):
         self.textbox.SetValue("Hello again")
         
     def ButtonThreePressed(self, event):
-        self.textbox.Clear()
+		s = self.obj.get_info(int(self.indextextbox.GetValue()))
+		self.textbox.SetValue(s)
+        #self.textbox.Clear()
         
     def ButtonFourPressed(self, event):
         # print "Parent", self.GetParent()
