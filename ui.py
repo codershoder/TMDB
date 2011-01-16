@@ -41,9 +41,9 @@ class MyPanel(wx.Panel):
 
         self.label1 = wx.StaticText(self, -1, 'Enter the name of the movie',wx.DefaultPosition, wx.DefaultSize)
         self.label1.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
-        self.searchtextbox = wx.TextCtrl(self, -1, "",wx.DefaultPosition, wx.DefaultSize)
-        
-        
+        self.searchtextbox = wx.TextCtrl(self, 1005, "",wx.DefaultPosition, wx.DefaultSize,style=wx.TE_PROCESS_ENTER)
+        wx.EVT_TEXT_ENTER(self,1005,self.ButtonOnePressed)
+                
         # The arg 1 and wx.EXPAND makes the
         # button fill the left-over space.
         menusizer.Add(self.label1,1, wx.EXPAND)
@@ -52,7 +52,7 @@ class MyPanel(wx.Panel):
         #menusizer.Add(button2, 1, wx.EXPAND)
         #menusizer.Add(button3, 1, wx.EXPAND)
         menusizer.Add(button4, 1, wx.EXPAND)
-
+        
         topsizer.Add(menusizer, 0)
         topsizer.Add(contentsizer, 1, wx.EXPAND)
         
@@ -68,6 +68,7 @@ class MyPanel(wx.Panel):
 			self.textbox.SetValue(constants.COULD_NOT_FIND_MOVIE)
 			return
 		self.textbox.SetValue(db)
+		
         # print "ID is", wx.NewId()
         
     def ButtonTwoPressed(self, event):
