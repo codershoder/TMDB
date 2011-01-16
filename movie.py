@@ -81,7 +81,7 @@ class movie:
 	#print self.similar_movie_overview
 	info_str = ""
 	for i in range(len(self.similar_movie_list_title)):
-		info_str += '\n\n[' + str(i) + ']\n' + self.similar_movie_list_title[(i)] + ':\n'
+		info_str += '\n\n Index --> [' + str(i) + ']\n' + self.similar_movie_list_title[(i)] + ':\n'
 		#if i < len(self.similar_movie_release[(i)]) and self.similar_movie_release is not None:
 		#	info_str += self.similar_movie_release[i]
 		if i < len(self.similar_movie_overview[(i)]) and self.similar_movie_overview is not None:
