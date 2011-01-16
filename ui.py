@@ -14,6 +14,7 @@ class MyPanel(wx.Panel):
         # menusizer = wx.GridSizer(4, 1)
         contentsizer = wx.BoxSizer( wx.VERTICAL )
         
+        #Multiline text box
         self.textbox = wx.TextCtrl(
             self, -1, "",
             wx.DefaultPosition, wx.DefaultSize,
@@ -21,10 +22,10 @@ class MyPanel(wx.Panel):
         
         self.textbox.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL,wx.NORMAL))
 
-        button1 = wx.Button(self, 1001, "Search")
+        button1 = wx.Button(self, -1, "Search")
         #button2 = wx.Button(self, 1002, "Say hello again")
         #button3 = wx.Button(self, 1003, "Clear")
-        button4 = wx.Button(self, 1004, "Quit")
+        button4 = wx.Button(self, -1, "Quit")
         
         button1.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
         #button2.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
@@ -44,8 +45,9 @@ class MyPanel(wx.Panel):
         self.searchtextbox = wx.TextCtrl(self, -1, "",wx.DefaultPosition, wx.DefaultSize,style=wx.TE_PROCESS_ENTER)
         wx.EVT_TEXT_ENTER(self,self.searchtextbox.GetId(),self.ButtonOnePressed)
         
-        self.label2 = wx.StaticText(self, -1, '\n\nEnter the index of the movie',wx.DefaultPosition, wx.DefaultSize)
+        self.label2 = wx.StaticText(self, -1, '\n\n\n\n\n\n\n\nEnter the index of the movie',wx.DefaultPosition, wx.DefaultSize)
         self.label2.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
+        self.label2.Show(False)
         """self.slider = wx.Slider(
 		       self, 100, 25, 1, 100, pos=(10, 10),size=(250, -1),
 		       style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS)"""
@@ -77,6 +79,7 @@ class MyPanel(wx.Panel):
 			self.textbox.SetValue(constants.COULD_NOT_FIND_MOVIE)
 			return
 		self.textbox.SetValue(db)
+		self.label2.Show(True)
 		
 		
 
