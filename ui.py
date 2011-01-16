@@ -17,7 +17,7 @@ class MyPanel(wx.Panel):
         self.textbox = wx.TextCtrl(
             self, -1, "",
             wx.DefaultPosition, wx.DefaultSize,
-            wx.TE_MULTILINE)
+            wx.TE_MULTILINE|wx.TE_RICH2)
         
         self.textbox.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL,wx.NORMAL))
 
@@ -31,18 +31,24 @@ class MyPanel(wx.Panel):
         #button3.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))  
         button4.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
 
-        wx.EVT_BUTTON(self, 1001, self.ButtonOnePressed)
+        wx.EVT_BUTTON(self, button1.GetId(), self.ButtonOnePressed)
         #wx.EVT_BUTTON(self, 1002, self.ButtonTwoPressed)
         #wx.EVT_BUTTON(self, 1003, self.ButtonThreePressed)
-        wx.EVT_BUTTON(self, 1004, self.ButtonFourPressed)
+        wx.EVT_BUTTON(self, button4.GetId(), self.ButtonFourPressed)
         
         # topsizer.Add(self.textbox, 2, wx.ALL, 10)
         contentsizer.Add(self.textbox, 1, wx.EXPAND)
 
         self.label1 = wx.StaticText(self, -1, 'Enter the name of the movie',wx.DefaultPosition, wx.DefaultSize)
         self.label1.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
-        self.searchtextbox = wx.TextCtrl(self, 1005, "",wx.DefaultPosition, wx.DefaultSize,style=wx.TE_PROCESS_ENTER)
-        wx.EVT_TEXT_ENTER(self,1005,self.ButtonOnePressed)
+        self.searchtextbox = wx.TextCtrl(self, -1, "",wx.DefaultPosition, wx.DefaultSize,style=wx.TE_PROCESS_ENTER)
+        wx.EVT_TEXT_ENTER(self,self.searchtextbox.GetId(),self.ButtonOnePressed)
+        
+        self.label2 = wx.StaticText(self, -1, '\n\nEnter the index of the movie',wx.DefaultPosition, wx.DefaultSize)
+        self.label2.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
+        """self.slider = wx.Slider(
+		       self, 100, 25, 1, 100, pos=(10, 10),size=(250, -1),
+		       style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS)"""
                 
         # The arg 1 and wx.EXPAND makes the
         # button fill the left-over space.
@@ -52,6 +58,9 @@ class MyPanel(wx.Panel):
         #menusizer.Add(button2, 1, wx.EXPAND)
         #menusizer.Add(button3, 1, wx.EXPAND)
         menusizer.Add(button4, 1, wx.EXPAND)
+        menusizer.Add(self.label2,1, wx.EXPAND)
+        #menusizer.Add(self.slider, 1, wx.EXPAND)
+        
         
         topsizer.Add(menusizer, 0)
         topsizer.Add(contentsizer, 1, wx.EXPAND)
@@ -68,6 +77,9 @@ class MyPanel(wx.Panel):
 			self.textbox.SetValue(constants.COULD_NOT_FIND_MOVIE)
 			return
 		self.textbox.SetValue(db)
+		
+		
+
 		
         # print "ID is", wx.NewId()
         
