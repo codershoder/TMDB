@@ -25,7 +25,7 @@ class movie:
   def get_info(self,index):
 	  print '\nTitle: %s' %  self.string_if_not_null(self.similar_movie_list_title[index])
 	  print '\nType: %s' %  self.string_if_not_null(self.similar_movie_type[index])
-	  print '\nURL: %s' %  self.string_if_not_null(self.similar_movie_url[index])
+	  print '\nTMDB URL: %s' %  self.string_if_not_null(self.similar_movie_url[index])
 	  print '\nRating: %s' %  self.string_if_not_null(self.similar_movie_rating[index])
 	
   def display_all(self):

@@ -21,8 +21,6 @@
 #       MA 02110-1301, USA.
 
 import movie
-import webbrowser
-
 	
 def main():
 	"""Getting input and passing to other functions"""
