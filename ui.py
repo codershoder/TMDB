@@ -22,18 +22,19 @@ class MyPanel(wx.Panel):
         
         self.textbox.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL,wx.NORMAL))
 
-        button1 = wx.Button(self, -1, "Search")
-        #button2 = wx.Button(self, 1002, "Say hello again")
+        button1 = wx.Button(self, -1, "Search Title")
+        self.button2 = wx.Button(self, 1002, "Search Index")
         #button3 = wx.Button(self, 1003, "Clear")
         button4 = wx.Button(self, -1, "Quit")
         
-        button1.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
-        #button2.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
+        button_font = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD)
+        button1.SetFont(button_font)
+        self.button2.SetFont(button_font)
         #button3.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))  
-        button4.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
+        button4.SetFont(button_font)
 
         wx.EVT_BUTTON(self, button1.GetId(), self.ButtonOnePressed)
-        #wx.EVT_BUTTON(self, 1002, self.ButtonTwoPressed)
+        wx.EVT_BUTTON(self, button1.GetId(), self.ButtonTwoPressed)
         #wx.EVT_BUTTON(self, 1003, self.ButtonThreePressed)
         wx.EVT_BUTTON(self, button4.GetId(), self.ButtonFourPressed)
         
@@ -44,6 +45,9 @@ class MyPanel(wx.Panel):
         self.label1.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
         self.searchtextbox = wx.TextCtrl(self, -1, "",wx.DefaultPosition, wx.DefaultSize,style=wx.TE_PROCESS_ENTER)
         wx.EVT_TEXT_ENTER(self,self.searchtextbox.GetId(),self.ButtonOnePressed)
+        
+        self.indextextbox = wx.TextCtrl(self, -1, "",wx.DefaultPosition, wx.DefaultSize,style=wx.TE_PROCESS_ENTER)
+        wx.EVT_TEXT_ENTER(self,self.indextextbox.GetId(),self.ButtonThreePressed)
         self.label2 = wx.StaticText(self, -1, '',wx.DefaultPosition, wx.DefaultSize)
         self.label2.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
 
@@ -61,6 +65,8 @@ class MyPanel(wx.Panel):
         #menusizer.Add(button3, 1, wx.EXPAND)
         menusizer.Add(button4, 1, wx.EXPAND)
         menusizer.Add(self.label2,1, wx.EXPAND)
+        menusizer.Add(self.indextextbox,1, wx.EXPAND)
+        menusizer.Add(self.button2, 1, wx.EXPAND)
         #menusizer.Add(self.slider, 1, wx.EXPAND)
         
         
@@ -68,6 +74,7 @@ class MyPanel(wx.Panel):
         topsizer.Add(contentsizer, 1, wx.EXPAND)
         
         self.SetSizer(topsizer)
+        self.button2.Disable()
 
     def ButtonOnePressed(self, event):
 		if self.searchtextbox.GetValue() == "":
@@ -80,7 +87,7 @@ class MyPanel(wx.Panel):
 			return
 		self.textbox.SetValue(constants.SUMMARY)
 		self.textbox.AppendText(db)
-		
+		self.button2.Enable()
 		self.label2.SetLabel('Enter the index')
 		
 		
